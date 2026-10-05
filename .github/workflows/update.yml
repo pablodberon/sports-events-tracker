@@ -2,8 +2,12 @@ name: Actualizar agenda deportiva
 
 on:
   schedule:
-    - cron: "0 9 * * *"
+    - cron: "0 9 * * *"   # 09:00 UTC todos los dias (06:00 Argentina). Ajustalo si queres otro horario.
   workflow_dispatch: {}
+
+concurrency:
+  group: agenda-deportiva-update
+  cancel-in-progress: false
 
 permissions:
   contents: write
