@@ -180,12 +180,29 @@ def fetch_espn_events(sport_path, league_code, days_ahead):
     if not events:
         # La API de ESPN no soporta rango de fechas en la mayoria de los deportes
         # (devuelve 400), asi que recorremos dia por dia todo el rango pedido.
+        # Si el primer dia tira 400, es que sport_path/league_code esta mal
+        # (no existe esa combinacion en ESPN) -> cortamos en vez de insistir
+        # 60 veces con el mismo error.
+        consecutive_400 = 0
         for i in range(days_ahead):
             d = today + timedelta(days=i)
             try:
                 resp = requests.get(url, params={"dates": f"{d:%Y%m%d}"}, timeout=20)
                 resp.raise_for_status()
                 events.extend(resp.json().get("events", []))
+                consecutive_400 = 0
+            except requests.exceptions.HTTPError as e:
+                if e.response is not None and e.response.status_code == 400:
+                    consecutive_400 += 1
+                    if consecutive_400 >= 2:
+                        print(
+                            f"[WARN] ESPN: {sport_path}/{league_code} devuelve 400 de forma "
+                            "sistematica, el codigo de liga/deporte probablemente esta mal. "
+                            "Cortando esta competencia."
+                        )
+                        break
+                else:
+                    print(f"[WARN] ESPN (dia {d}) fallo: {e}")
             except Exception as e:  # noqa: BLE001
                 print(f"[WARN] ESPN (dia {d}) fallo: {e}")
             time.sleep(0.15)
