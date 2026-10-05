@@ -135,6 +135,9 @@ def main():
     os.makedirs("docs", exist_ok=True)
     with open("docs/index.html", "w", encoding="utf-8") as fh:
         fh.write(html)
+    # Evita que GitHub Pages intente procesar la carpeta con Jekyll
+    # (si no, falla buscando assets/css/style.scss que no existe).
+    open("docs/.nojekyll", "w").close()
     print(f"Dashboard generado: {len(rows)} eventos, {featured_count} destacados.")
 
 
