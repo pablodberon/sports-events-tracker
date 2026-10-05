@@ -37,6 +37,8 @@ En el repo: **Settings > Secrets and variables > Actions > New repository secret
 
 Despues de la primera corrida del workflow vas a tener el dashboard en `https://<tu-usuario>.github.io/<repo>/`.
 
+> Si el build falla con un error de Jekyll tipo `Conversion error: Jekyll::Converters::Scss... No such file or directory`, es porque GitHub Pages intenta procesar `docs/` con Jekyll (busca un tema, `assets/css/style.scss`, etc.) aunque nuestro `index.html` es HTML plano. `generate_dashboard.py` ya crea un archivo vacio `docs/.nojekyll` para evitar esto, pero si tu primer build fallo antes de que corriera el script, agrega ese archivo vacio a mano en `docs/` y pushealo.
+
 ## 4. Primera corrida manual
 
 Anda a la pestaña **Actions**, elegi "Actualizar agenda deportiva" y tocá **Run workflow** para poblar la base ya mismo (si no, se ejecuta solo una vez al dia por el cron).
