@@ -2,7 +2,7 @@ name: Actualizar agenda deportiva
 
 on:
   schedule:
-    - cron: "0 9 * * *"   # 09:00 UTC todos los dias (06:00 Argentina). Ajustalo si queres otro horario.
+    - cron: "0 9 * * *"
   workflow_dispatch: {}
 
 permissions:
