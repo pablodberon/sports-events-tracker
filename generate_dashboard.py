@@ -10,8 +10,11 @@ Variables de entorno requeridas:
 
 import os
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 import requests
+
+AR_TZ = ZoneInfo("America/Argentina/Buenos_Aires")
 
 AIRTABLE_API_KEY = os.environ["AIRTABLE_API_KEY"]
 AIRTABLE_BASE_ID = os.environ.get("AIRTABLE_BASE_ID", "appqesyHMwFB4XOv0")
@@ -70,7 +73,7 @@ def main():
         rows.append(
             {
                 "title": f.get("Title", ""),
-                "date": d,
+                "date": d.astimezone(AR_TZ),
                 "competition": ", ".join(comp_name_by_id.get(cid, "") for cid in comp_ids),
                 "importance": f.get("Importance", "Normal"),
                 "featured": bool(f.get("Featured")),
@@ -85,7 +88,7 @@ def main():
         badge = "&#9733; destacado" if e["featured"] else ""
         return (
             f"<tr class=\"{cls}\">"
-            f"<td>{e['date'].strftime('%Y-%m-%d %H:%M')} UTC</td>"
+            f"<td>{e['date'].strftime('%Y-%m-%d %H:%M')} ART</td>"
             f"<td>{esc(e['title'])}</td>"
             f"<td>{esc(e['competition'])}</td>"
             f"<td>{esc(e['round'])}</td>"
@@ -95,7 +98,7 @@ def main():
         )
 
     html_rows = "\n".join(row_html(e) for e in rows[:400])
-    updated = now.strftime("%Y-%m-%d %H:%M UTC")
+    updated = now.astimezone(AR_TZ).strftime("%Y-%m-%d %H:%M ART")
     featured_count = sum(1 for e in rows if e["featured"])
 
     html = f"""<!doctype html>
@@ -123,7 +126,7 @@ def main():
   <h1>Agenda deportiva</h1>
   <div class="meta">Actualizado {updated} &middot; {len(rows)} eventos proximos &middot; {featured_count} destacados</div>
   <table>
-    <thead><tr><th>Fecha</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
+    <thead><tr><th>Fecha (Argentina)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
     <tbody>
       {html_rows}
     </tbody>
