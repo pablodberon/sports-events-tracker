@@ -233,7 +233,7 @@ def parse_espn_event(ev, teams):
 
     return {
         "external_id": f"espn-{ev.get('id')}",
-        "title": ev.get("shortName") or ev.get("name") or "",
+        "title": ev.get("name") or ev.get("shortName") or "",
         "date": ev.get("date"),
         "round": round_name,
         "source_url": source_url,
