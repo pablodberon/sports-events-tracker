@@ -1,20 +1,36 @@
 """
 Actualiza la tabla Events de Airtable con los proximos partidos/carreras
-de las competencias activas, usando ESPN (API publica no oficial) o
-TheSportsDB segun lo configurado en la tabla Competitions.
+de las competencias activas. Segun lo configurado en Competitions, cada
+competencia se trae de:
+  - NHL Oficial / MLB Oficial: API propia de NHL.com / MLB.com (confiables).
+  - F1 Oficial: se scrapea la pagina oficial de calendario de formula1.com.
+  - ESPN: API publica no oficial de espn.com (fallback para el resto:
+    ligas europeas, CONMEBOL, NBA, NCAA, etc. que bloquean o son muy
+    pesadas de scrapear desde su sitio oficial).
+  - TheSportsDB: fallback generico para lo que no entra en lo anterior.
 
 Variables de entorno requeridas:
   AIRTABLE_API_KEY   Personal Access Token de Airtable
   AIRTABLE_BASE_ID   ID de la base (default: appqesyHMwFB4XOv0)
   SPORTSDB_KEY       Key de TheSportsDB (default: "3", key publica de pruebas)
-  DAYS_AHEAD         Dias hacia adelante a buscar en ESPN (default: 60)
+  DAYS_AHEAD         Dias hacia adelante a buscar (default: 60)
 """
 
+import base64
+import json
 import os
+import re
 import time
 from datetime import datetime, timedelta
 
 import requests
+
+BROWSER_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+    )
+}
 
 AIRTABLE_API_KEY = os.environ["AIRTABLE_API_KEY"]
 AIRTABLE_BASE_ID = os.environ.get("AIRTABLE_BASE_ID", "appqesyHMwFB4XOv0")
@@ -82,7 +98,10 @@ def get_active_competitions():
     comps = []
     for r in recs:
         f = r["fields"]
-        if not f.get("Fuente API") or not f.get("API League Code"):
+        source = f.get("Fuente API")
+        if not source:
+            continue
+        if source in ("ESPN", "TheSportsDB") and not f.get("API League Code"):
             continue
         comps.append(
             {
@@ -285,6 +304,219 @@ def parse_sportsdb_event(ev, teams):
 
 
 # ---------------------------------------------------------------------------
+# NHL (API oficial de NHL.com)
+# ---------------------------------------------------------------------------
+
+NHL_STATUS_MAP = {
+    "FUT": "Programado",
+    "PRE": "Programado",
+    "LIVE": "Programado",
+    "CRIT": "Programado",
+    "OFF": "Jugado",
+    "FINAL": "Jugado",
+    "PPD": "Pospuesto",
+    "CNCL": "Cancelado",
+}
+
+
+def fetch_nhl_events(days_ahead):
+    events = []
+    today = datetime.utcnow().date()
+    seen_dates = set()
+    d = today
+    end = today + timedelta(days=days_ahead)
+    while d <= end:
+        try:
+            resp = requests.get(f"https://api-web.nhle.com/v1/schedule/{d:%Y-%m-%d}", timeout=20)
+            resp.raise_for_status()
+            data = resp.json()
+            for gw in data.get("gameWeek", []):
+                try:
+                    gw_date = datetime.strptime(gw["date"], "%Y-%m-%d").date()
+                except (KeyError, ValueError):
+                    continue
+                if gw_date in seen_dates:
+                    continue
+                seen_dates.add(gw_date)
+                events.extend(gw.get("games", []))
+        except Exception as e:  # noqa: BLE001
+            print(f"[WARN] NHL oficial fallo para semana de {d}: {e}")
+        d += timedelta(days=7)
+        time.sleep(0.2)
+    return events
+
+
+def parse_nhl_event(ev, teams):
+    away = ev.get("awayTeam", {})
+    home = ev.get("homeTeam", {})
+
+    def team_name(t):
+        place = (t.get("placeName") or {}).get("default", "")
+        common = (t.get("commonName") or {}).get("default", "")
+        return f"{place} {common}".strip()
+
+    away_name, home_name = team_name(away), team_name(home)
+    participant_ids = [t["id"] for t in (match_team(away_name, teams), match_team(home_name, teams)) if t]
+
+    round_name = "Playoffs" if ev.get("gameType") == 3 else ""
+    return {
+        "external_id": f"nhl-{ev.get('id')}",
+        "title": f"{away_name} at {home_name}".strip(),
+        "date": ev.get("startTimeUTC"),
+        "round": round_name,
+        "source_url": f"https://www.nhl.com/gamecenter/{ev.get('id')}" if ev.get("id") else "",
+        "status": NHL_STATUS_MAP.get(ev.get("gameState", ""), "Programado"),
+        "participant_ids": participant_ids,
+    }
+
+
+# ---------------------------------------------------------------------------
+# MLB (API oficial de MLB Advanced Media)
+# ---------------------------------------------------------------------------
+
+MLB_STATUS_MAP = {
+    "Scheduled": "Programado",
+    "Pre-Game": "Programado",
+    "Warmup": "Programado",
+    "In Progress": "Programado",
+    "Final": "Jugado",
+    "Game Over": "Jugado",
+    "Postponed": "Pospuesto",
+    "Suspended": "Pospuesto",
+    "Cancelled": "Cancelado",
+}
+
+
+def fetch_mlb_events(days_ahead):
+    today = datetime.utcnow().date()
+    end = today + timedelta(days=days_ahead)
+    events = []
+    try:
+        resp = requests.get(
+            "https://statsapi.mlb.com/api/v1/schedule",
+            params={"sportId": 1, "startDate": f"{today:%Y-%m-%d}", "endDate": f"{end:%Y-%m-%d}"},
+            timeout=20,
+        )
+        resp.raise_for_status()
+        for day in resp.json().get("dates", []):
+            events.extend(day.get("games", []))
+    except Exception as e:  # noqa: BLE001
+        print(f"[WARN] MLB oficial fallo: {e}")
+    return events
+
+
+def parse_mlb_event(ev, teams):
+    teams_obj = ev.get("teams", {})
+    away = teams_obj.get("away", {}).get("team", {}).get("name", "")
+    home = teams_obj.get("home", {}).get("team", {}).get("name", "")
+    participant_ids = [t["id"] for t in (match_team(away, teams), match_team(home, teams)) if t]
+    status = ev.get("status", {}).get("detailedState", "")
+    return {
+        "external_id": f"mlb-{ev.get('gamePk')}",
+        "title": f"{away} at {home}".strip(),
+        "date": ev.get("gameDate"),
+        "round": ev.get("seriesDescription") or "",
+        "source_url": f"https://www.mlb.com/gameday/{ev.get('gamePk')}" if ev.get("gamePk") else "",
+        "status": MLB_STATUS_MAP.get(status, "Programado"),
+        "participant_ids": participant_ids,
+    }
+
+
+# ---------------------------------------------------------------------------
+# F1 (se scrapea la pagina oficial de calendario de formula1.com)
+# ---------------------------------------------------------------------------
+
+F1_CONTEXT_RE = re.compile(r'data-f1rd-a7s-context="([^"]+)"')
+F1_DATE_RE = re.compile(r">(\d{1,2}(?:\s*-\s*\d{1,2})?\s+[A-Za-z]{3,9})<")
+F1_ROUND_RE = re.compile(r">ROUND\s+(\d+)<", re.I)
+F1_MONTHS = {
+    "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+    "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
+}
+
+
+def _parse_f1_date(date_text, year):
+    if not date_text:
+        return None
+    last_part = date_text.replace("–", "-").split("-")[-1].strip()
+    bits = last_part.split()
+    if len(bits) != 2:
+        return None
+    day_str, month_str = bits
+    month = F1_MONTHS.get(month_str.strip()[:3].lower())
+    if not month:
+        return None
+    try:
+        day = int(day_str)
+    except ValueError:
+        return None
+    return f"{year:04d}-{month:02d}-{day:02d}T14:00:00Z"
+
+
+def _fetch_f1_html_for_year(year):
+    try:
+        resp = requests.get(
+            f"https://www.formula1.com/en/racing/{year}",
+            headers=BROWSER_HEADERS,
+            timeout=20,
+        )
+        resp.raise_for_status()
+        return resp.text
+    except Exception as e:  # noqa: BLE001
+        print(f"[WARN] F1 oficial fallo para {year}: {e}")
+        return ""
+
+
+def fetch_f1_events():
+    today = datetime.utcnow()
+    years = [today.year] if today.month < 11 else [today.year, today.year + 1]
+    races = []
+    for year in years:
+        html = _fetch_f1_html_for_year(year)
+        if not html:
+            continue
+        for m in F1_CONTEXT_RE.finditer(html):
+            padded = m.group(1) + "=" * (-len(m.group(1)) % 4)
+            try:
+                payload = json.loads(base64.b64decode(padded))
+            except Exception:  # noqa: BLE001
+                continue
+            race_name = payload.get("raceName", "")
+            path = payload.get("path", "")
+            if not race_name or not path.startswith("/en/racing/"):
+                continue
+            window = html[max(0, m.start() - 1500) : m.start()]
+            date_matches = list(F1_DATE_RE.finditer(window))
+            round_matches = list(F1_ROUND_RE.finditer(window))
+            races.append(
+                {
+                    "race_name": race_name,
+                    "path": path,
+                    "date_text": date_matches[-1].group(1) if date_matches else None,
+                    "round": f"Ronda {round_matches[-1].group(1)}" if round_matches else "",
+                    "year": year,
+                }
+            )
+    return races
+
+
+def parse_f1_event(ev):
+    date_iso = _parse_f1_date(ev.get("date_text"), ev.get("year"))
+    if not date_iso:
+        return None
+    slug = ev.get("path", "").rstrip("/").split("/")[-1]
+    return {
+        "external_id": f"f1-{ev.get('year')}-{slug}",
+        "title": (ev.get("race_name") or "").title(),
+        "date": date_iso,
+        "round": ev.get("round", ""),
+        "source_url": f"https://www.formula1.com{ev.get('path')}",
+        "status": "Programado",
+        "participant_ids": [],
+    }
+
+
+# ---------------------------------------------------------------------------
 # Upsert
 # ---------------------------------------------------------------------------
 
@@ -314,6 +546,15 @@ def run():
         elif comp["source"] == "TheSportsDB":
             raw = fetch_sportsdb_events(comp["league_code"])
             parsed = [parse_sportsdb_event(ev, teams) for ev in raw]
+        elif comp["source"] == "NHL Oficial":
+            raw = fetch_nhl_events(DAYS_AHEAD)
+            parsed = [parse_nhl_event(ev, teams) for ev in raw]
+        elif comp["source"] == "MLB Oficial":
+            raw = fetch_mlb_events(DAYS_AHEAD)
+            parsed = [parse_mlb_event(ev, teams) for ev in raw]
+        elif comp["source"] == "F1 Oficial":
+            raw = fetch_f1_events()
+            parsed = [p for p in (parse_f1_event(ev) for ev in raw) if p]
         else:
             continue
 
