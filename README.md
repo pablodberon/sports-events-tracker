@@ -5,7 +5,8 @@ Base de Airtable: https://airtable.com/appqesyHMwFB4XOv0
 ## Que hace esto
 
 - **Airtable** guarda las competencias, equipos y eventos (`Sports`, `Competitions`, `Teams`, `Events`).
-- **GitHub Actions** corre `update_events.py` una vez por dia: lee las competencias activas, busca los proximos partidos/carreras en ESPN o TheSportsDB segun corresponda, y los carga/actualiza en `Events`. Despues corre `generate_dashboard.py`, que arma `docs/index.html` con los proximos eventos.
+- **GitHub Actions** corre `update_events.py` una vez por dia: lee las competencias activas y busca los proximos partidos/carreras segun la fuente configurada en cada una (`NHL Oficial`, `MLB Oficial`, `F1 Oficial`, `ESPN` o `TheSportsDB`), y los carga/actualiza en `Events`. Despues corre `generate_dashboard.py`, que arma `docs/index.html` con los proximos eventos.
+- **Fuentes de datos por competencia**: NHL y MLB usan la API oficial de NHL.com / MLB.com (confiables, pensadas para terceros). F1 scrapea la pagina oficial de calendario de formula1.com (funciona pero es "best effort": no todas las fechas se logran extraer bien, formula1.com puede cambiar su diseño). El resto (ligas europeas, Libertadores, Liga Arg., NBA, NCAA, MotoGP) sigue por ESPN/TheSportsDB porque sus sitios oficiales tienen proteccion anti-bot o son demasiado pesados para scrapear de forma confiable desde GitHub Actions.
 - **GitHub Pages** publica `docs/index.html` como una pagina web que podes abrir cuando quieras.
 - **Automatizaciones de Airtable** (ya creadas, estan apagadas por default) mandan los mails:
   - *Aviso 10-15 dias*: corre todos los dias a las 08:00 (Argentina), busca eventos destacados que caen entre 10 y 15 dias desde hoy y todavia no fueron avisados, te manda un mail a pablo.d.beron@disney.com y los marca como notificados.
@@ -60,15 +61,18 @@ Si en algun momento te empieza a llegar el mail de "10-15 dias" incluso en dias 
 
 - **Agregar un equipo a seguir**: fila nueva en `Teams`, tildar `Watched`. Sus partidos van a contar como destacados automaticamente (si el nombre del equipo en ESPN/TheSportsDB coincide razonablemente con el `Nombre` que cargues; si no coincide, completa `API Team Code` con el nombre exacto que usa la API).
 - **Agregar una competencia/liga nueva**: fila nueva en `Competitions`:
-  - `Fuente API`: `ESPN` o `TheSportsDB`.
+  - `Fuente API`: `NHL Oficial`, `MLB Oficial`, `F1 Oficial` (no necesitan mas datos, ya estan "hardcodeadas" en el script porque son una sola competencia cada una), `ESPN` o `TheSportsDB`.
   - Para ESPN: `API Sport Path` es la familia (`soccer`, `basketball`, `football`, `hockey`, `baseball`, `racing`...) y `API League Code` el codigo de liga (ej. `uefa.champions`, `nba`, `nfl`, `mens-college-basketball`). Podes deducirlos mirando la URL de `https://www.espn.com/<deporte>/scoreboard` o buscando "espn hidden api <liga>".
   - Para TheSportsDB: `API League Code` es el ID numerico de la liga (buscalo en thesportsdb.com/api.php o con el endpoint `search_all_leagues.php`).
+  - Si queres una fuente oficial nueva que no sea NHL/MLB/F1 (por ejemplo, encontraste que tal liga tiene una API propia abierta), eso sí requiere que yo le agregue el adaptador correspondiente al script — no es 100% sin-codigo como ESPN/TheSportsDB.
   - `Activa` = true, y opcionalmente `Default Importance` si queres que sus eventos nazcan marcados como destacados (por ejemplo "Gran Premio" para automovilismo, "Relevancia Continental" para copas internacionales).
-  - No hace falta tocar el script: la proxima corrida del workflow la toma sola.
+  - No hace falta tocar el script para sumar ligas que ya usan una fuente existente: la proxima corrida del workflow las toma sola.
 - **Marcar un clasico/evento puntual como destacado a mano**: entra al evento en `Events` y cambia `Importance`. El script nunca pisa ese campo en eventos que ya existen, asi que tu edicion queda.
 
 ## Limitaciones a tener en cuenta
 
-- ESPN no tiene una API publica oficial — es la que usa espn.com internamente. Funciona bien hoy pero podria cambiar sin aviso.
+- ESPN no tiene una API publica oficial — es la que usa espn.com internamente. Funciona bien hoy pero podria cambiar sin aviso. La usamos como respaldo para las ligas que bloquean scraping desde su sitio oficial.
+- **F1 Oficial** scrapea `formula1.com/en/racing/<año>`: funciona, pero de las ~29 entradas que trae la pagina (carreras + testing de pretemporada) solo se pudo extraer fecha confiable para parte de ellas (el resto queda sin fecha y no se carga). Si formula1.com cambia el diseño de esa pagina, el scraper puede dejar de funcionar — avisame si notas que F1 dejo de actualizarse.
+- **NHL Oficial** y **MLB Oficial** usan las APIs propias de NHL.com / MLB.com (las mismas que usan esos sitios para mostrar sus calendarios) — son las fuentes mas confiables de todo el sistema.
 - El MotoGP quedo cargado con un League Code de ejemplo (`motogp`) en TheSportsDB: confirma el ID real en thesportsdb.com/api.php antes de que dependas de el (dejé una nota en el campo `Notas` de esa fila).
-- El emparejamiento de nombres de equipos (ESPN/TheSportsDB vs. tu tabla `Teams`) es por texto; si un equipo nunca aparece como destacado por "watched", probablemente el nombre no matchea — completa `API Team Code` con el nombre tal cual lo devuelve la API.
+- El emparejamiento de nombres de equipos (contra tu tabla `Teams`) es por texto; si un equipo nunca aparece como destacado por "watched", probablemente el nombre no matchea — completa `API Team Code` con el nombre tal cual lo devuelve la fuente correspondiente.
