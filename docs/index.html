@@ -20,12 +20,55 @@
                  padding:16px 18px; margin-bottom:18px; }
   section.day h2 { margin:0 0 2px; font-size:16px; text-transform:capitalize; }
   .day-meta { color:#9aa0ab; font-size:12px; margin-bottom:10px; }
+  .filters { background:#171920; border:1px solid #262a35; border-radius:10px;
+              padding:14px 18px; margin-bottom:18px; }
+  .filters-head { display:flex; align-items:center; justify-content:space-between;
+                    margin-bottom:10px; font-size:13px; }
+  .filters-head button { background:#22252d; color:#e8e8ea; border:1px solid #333742;
+                           border-radius:6px; padding:4px 10px; font-size:12px; cursor:pointer;
+                           margin-left:6px; }
+  .filters-head button:hover { background:#2a2e38; }
+  .filters-list { display:flex; flex-wrap:wrap; gap:8px 16px; font-size:13px; }
+  .filters-list label { display:flex; align-items:center; gap:6px; cursor:pointer; white-space:nowrap; }
+  .no-results { color:#9aa0ab; font-size:13px; padding:12px 0; display:none; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Agenda deportiva</h1>
-  <div class="meta">Actualizado 2026-10-08 13:21 ART &middot; 400 eventos proximos &middot; 197 destacados &middot; la jornada va de 4am a 3:59am del dia siguiente (hora Argentina)</div>
+  <div class="meta">Actualizado 2026-10-08 17:22 ART &middot; 400 eventos proximos &middot; 197 destacados &middot; la jornada va de 4am a 3:59am del dia siguiente (hora Argentina)</div>
+
+  <div class="filters">
+    <div class="filters-head">
+      <strong>Competencias</strong>
+      <span>
+        <button type="button" id="selAll">Todas</button>
+        <button type="button" id="selNone">Ninguna</button>
+      </span>
+    </div>
+    <div class="filters-list">
+      <label><input type="checkbox" class="comp-filter" value="Bundesliga (Alemania)" checked> Bundesliga (Alemania)</label>
+<label><input type="checkbox" class="comp-filter" value="Copa Libertadores" checked> Copa Libertadores</label>
+<label><input type="checkbox" class="comp-filter" value="Copa Sudamericana" checked> Copa Sudamericana</label>
+<label><input type="checkbox" class="comp-filter" value="Fórmula 1" checked> Fórmula 1</label>
+<label><input type="checkbox" class="comp-filter" value="La Liga (España)" checked> La Liga (España)</label>
+<label><input type="checkbox" class="comp-filter" value="Liga Profesional Argentina" checked> Liga Profesional Argentina</label>
+<label><input type="checkbox" class="comp-filter" value="Ligue 1 (Francia)" checked> Ligue 1 (Francia)</label>
+<label><input type="checkbox" class="comp-filter" value="MLB" checked> MLB</label>
+<label><input type="checkbox" class="comp-filter" value="NBA" checked> NBA</label>
+<label><input type="checkbox" class="comp-filter" value="NCAA Football (Bowls)" checked> NCAA Football (Bowls)</label>
+<label><input type="checkbox" class="comp-filter" value="NFL" checked> NFL</label>
+<label><input type="checkbox" class="comp-filter" value="NHL" checked> NHL</label>
+<label><input type="checkbox" class="comp-filter" value="Premier League (Inglaterra)" checked> Premier League (Inglaterra)</label>
+<label><input type="checkbox" class="comp-filter" value="Primeira Liga (Portugal)" checked> Primeira Liga (Portugal)</label>
+<label><input type="checkbox" class="comp-filter" value="Serie A (Italia)" checked> Serie A (Italia)</label>
+<label><input type="checkbox" class="comp-filter" value="UEFA Champions League" checked> UEFA Champions League</label>
+<label><input type="checkbox" class="comp-filter" value="UEFA Europa League" checked> UEFA Europa League</label>
+    </div>
+  </div>
+
+  <div class="no-results" id="noResults">No hay eventos para las competencias seleccionadas.</div>
+
   
     <section class="day">
       <h2>Jueves 8 de octubre</h2>
@@ -33,29 +76,29 @@
       <table>
         <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
         <tbody>
-          <tr class=""><td>20:00</td><td>Boston Celtics at Cleveland Cavaliers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>20:00</td><td>Missouri State Bears at Western Kentucky Hilltoppers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:00</td><td>Sam Houston Bearkats at Liberty Flames</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>20:00</td><td>Vancouver Canucks at Carolina Hurricanes</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Utah Mammoth at Boston Bruins</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Minnesota Wild at Tampa Bay Lightning</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Dallas Stars at Buffalo Sabres</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Nashville Predators at Montréal Canadiens</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Philadelphia Flyers at Ottawa Senators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:30</td><td>New Orleans Pelicans at Miami Heat</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:30</td><td>Philadelphia 76ers at Brooklyn Nets</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:30</td><td>Washington Wizards at New York Knicks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>20:30</td><td>South Florida Bulls at UTSA Roadrunners</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:30</td><td>South Alabama Jaguars at Arkansas State Red Wolves</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>20:30</td><td>Chicago Blackhawks at New York Islanders</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Atlanta Hawks at San Antonio Spurs</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>San Jose Sharks at St. Louis Blues</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Cleveland Guardians at Chicago White Sox</td><td>MLB</td><td>AL Division Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Tampa Bay Rays at New York Yankees</td><td>MLB</td><td>AL Division Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:15</td><td>Tampa Bay Buccaneers at Dallas Cowboys</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>22:00</td><td>Colorado Avalanche at Calgary Flames</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:00</td><td>Toronto Maple Leafs at Vegas Golden Knights</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:30</td><td>Sacramento Kings at Los Angeles Lakers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+          <tr class="" data-competitions="NBA"><td>20:00</td><td>Boston Celtics at Cleveland Cavaliers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>Missouri State Bears at Western Kentucky Hilltoppers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>Sam Houston Bearkats at Liberty Flames</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Vancouver Canucks at Carolina Hurricanes</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Utah Mammoth at Boston Bruins</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Minnesota Wild at Tampa Bay Lightning</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Dallas Stars at Buffalo Sabres</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Nashville Predators at Montréal Canadiens</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Philadelphia Flyers at Ottawa Senators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:30</td><td>New Orleans Pelicans at Miami Heat</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:30</td><td>Philadelphia 76ers at Brooklyn Nets</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:30</td><td>Washington Wizards at New York Knicks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>South Florida Bulls at UTSA Roadrunners</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>South Alabama Jaguars at Arkansas State Red Wolves</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>20:30</td><td>Chicago Blackhawks at New York Islanders</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Atlanta Hawks at San Antonio Spurs</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>21:00</td><td>San Jose Sharks at St. Louis Blues</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="MLB"><td>21:00</td><td>Cleveland Guardians at Chicago White Sox</td><td>MLB</td><td>AL Division Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="MLB"><td>21:00</td><td>Tampa Bay Rays at New York Yankees</td><td>MLB</td><td>AL Division Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>21:15</td><td>Tampa Bay Buccaneers at Dallas Cowboys</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>22:00</td><td>Colorado Avalanche at Calgary Flames</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>23:00</td><td>Toronto Maple Leafs at Vegas Golden Knights</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>23:30</td><td>Sacramento Kings at Los Angeles Lakers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
         </tbody>
       </table>
     </section>
@@ -66,28 +109,28 @@
       <table>
         <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
         <tbody>
-          <tr class=""><td>09:00</td><td>Houston Rockets at Dallas Mavericks</td><td>NBA</td><td>NBA China Game</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>14:30</td><td>Sarmiento (Junín) at Aldosivi</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>14:45</td><td>Gil Vicente at Moreirense</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:30</td><td>Werder Bremen at Borussia Dortmund</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:45</td><td>Lyon at Lens</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>16:00</td><td>Espanyol at Málaga</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>16:15</td><td>Sporting CP at Braga</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>17:30</td><td>San Diego Padres at Milwaukee Brewers</td><td>MLB</td><td>NL Division Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>18:00</td><td>Atlético Tucumán at Gimnasia La Plata</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>19:30</td><td>Boca Juniors at Instituto (Córdoba)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>20:00</td><td>Florida State Seminoles at Louisville Cardinals</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>20:00</td><td>Pittsburgh Penguins at Columbus Blue Jackets</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>New York Rangers at Washington Capitals</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Seattle Kraken at Detroit Red Wings</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Memphis Grizzlies at Chicago Bulls</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Anaheim Ducks at Winnipeg Jets</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Atlanta Braves at Los Angeles Dodgers</td><td>MLB</td><td>NL Division Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:45</td><td>Defensa y Justicia at Unión (Santa Fe)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>22:00</td><td>Iowa Hawkeyes at Washington Huskies</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>22:00</td><td>Washington State Cougars at Utah State Aggies</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>22:00</td><td>Wyoming Cowboys at San José State Spartans</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>23:15</td><td>Iowa State Cyclones at BYU Cougars</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+          <tr class="" data-competitions="NBA"><td>09:00</td><td>Houston Rockets at Dallas Mavericks</td><td>NBA</td><td>NBA China Game</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>14:30</td><td>Sarmiento (Junín) at Aldosivi</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Primeira Liga (Portugal)"><td>14:45</td><td>Gil Vicente at Moreirense</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>15:30</td><td>Werder Bremen at Borussia Dortmund</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>15:45</td><td>Lyon at Lens</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>16:00</td><td>Espanyol at Málaga</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Primeira Liga (Portugal)"><td>16:15</td><td>Sporting CP at Braga</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="MLB"><td>17:30</td><td>San Diego Padres at Milwaukee Brewers</td><td>MLB</td><td>NL Division Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>18:00</td><td>Atlético Tucumán at Gimnasia La Plata</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>19:30</td><td>Boca Juniors at Instituto (Córdoba)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>Florida State Seminoles at Louisville Cardinals</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Pittsburgh Penguins at Columbus Blue Jackets</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>New York Rangers at Washington Capitals</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Seattle Kraken at Detroit Red Wings</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Memphis Grizzlies at Chicago Bulls</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>21:00</td><td>Anaheim Ducks at Winnipeg Jets</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="MLB"><td>21:00</td><td>Atlanta Braves at Los Angeles Dodgers</td><td>MLB</td><td>NL Division Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>21:45</td><td>Defensa y Justicia at Unión (Santa Fe)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>22:00</td><td>Iowa Hawkeyes at Washington Huskies</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>22:00</td><td>Washington State Cougars at Utah State Aggies</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>22:00</td><td>Wyoming Cowboys at San José State Spartans</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>23:15</td><td>Iowa State Cyclones at BYU Cougars</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
         </tbody>
       </table>
     </section>
@@ -98,106 +141,106 @@
       <table>
         <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
         <tbody>
-          <tr class=""><td>08:30</td><td>Leeds United at Arsenal</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>09:00</td><td>Athletic Club at Rayo Vallecano</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>10:00</td><td>Fiorentina at Genoa</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:30</td><td>Bayern Munich at FC Augsburg</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:30</td><td>SV Elversberg at 1. FC Union Berlin</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:30</td><td>Bayer Leverkusen at Mainz</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:30</td><td>Hamburg SV at TSG Hoffenheim</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:30</td><td>VfB Stuttgart at SC Paderborn 07</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>11:00</td><td>Brighton &amp; Hove Albion at Sunderland</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>11:00</td><td>AFC Bournemouth at Chelsea</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>11:00</td><td>Fulham at Ipswich Town</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>11:00</td><td>Brentford at Aston Villa</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>11:15</td><td>Atlético Madrid at Alavés</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>11:30</td><td>Santa Clara at Casa Pia</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>12:15</td><td>Le Havre AC at Lille</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>North Carolina Tar Heels at Pittsburgh Panthers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Indiana Hoosiers at Nebraska Cornhuskers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Wake Forest Demon Deacons at NC State Wolfpack</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Arizona Wildcats at West Virginia Mountaineers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>UCF Knights at Oklahoma State Cowboys</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Tulane Green Wave at Army Black Knights</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Texas A&amp;M Aggies at Missouri Tigers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Sacramento State Hornets at Bowling Green Falcons</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Parma at Internazionale</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:30</td><td>Ball State Cardinals at Northwestern Wildcats</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>13:30</td><td>Tottenham Hotspur at Manchester United</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>13:30</td><td>Getafe at Barcelona</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>13:30</td><td>Eintracht Frankfurt at RB Leipzig</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:45</td><td>South Carolina Gamecocks at Florida Gators</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>14:00</td><td>Old Dominion Monarchs at App State Mountaineers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>14:00</td><td>FC Porto at Maritimo</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>14:00</td><td>Philadelphia Flyers at Boston Bruins</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>15:00</td><td>Miami (OH) RedHawks at Massachusetts Minutemen</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>15:45</td><td>Huracán at Barracas Central</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>15:45</td><td>Frosinone at Napoli</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:45</td><td>Toulouse at AS Monaco</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:45</td><td>Angers at Brest</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:45</td><td>Le Mans at Paris Saint-Germain</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:45</td><td>Paris FC at Lorient</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>16:00</td><td>Villarreal at Real Madrid</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>16:30</td><td>Ole Miss Rebels at Vanderbilt Commodores</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>UCLA Bruins at Oregon Ducks</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Texas Longhorns at Oklahoma Sooners</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Stanford Cardinal at Notre Dame Fighting Irish</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Houston Cougars at Kansas State Wildcats</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Eastern Michigan Eagles at Akron Zips</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Tulsa Golden Hurricane at Navy Midshipmen</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Virginia Tech Hokies at California Golden Bears</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Kent State Golden Flashes at Western Michigan Broncos</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Central Michigan Chippewas at Ohio Bobcats</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Duke Blue Devils at Georgia Tech Yellow Jackets</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Buffalo Bulls at Toledo Rockets</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Charlotte 49ers at North Texas Mean Green</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Illinois Fighting Illini at Michigan State Spartans</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Estoril at Académico de Viseu</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>16:30</td><td>Vancouver Canucks at New Jersey Devils</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>16:45</td><td>UConn Huskies at Temple Owls</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>17:00</td><td>Rice Owls at East Carolina Pirates</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>17:00</td><td>Estudiantes de La Plata at Central Córdoba (Santiago del Estero)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>17:00</td><td>Edmonton Oilers at San Jose Sharks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>17:15</td><td>Maryland Terrapins at Ohio State Buckeyes</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>17:15</td><td>Tennessee Volunteers at Arkansas Razorbacks</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>19:00</td><td>San Diego State Aztecs at Oregon State Beavers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>19:00</td><td>Minnesota Wild at Florida Panthers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>19:15</td><td>Banfield at Tigre</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>19:30</td><td>LA Clippers at Toronto Raptors</td><td>NBA</td><td>NBA Canada Games 2026</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Atlanta Hawks at Indiana Pacers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Detroit Pistons at Washington Wizards</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>20:00</td><td>Nevada Wolf Pack at UTEP Miners</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:00</td><td>LSU Tigers at Kentucky Wildcats</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:00</td><td>Coastal Carolina Chanticleers at Marshall Thundering Herd</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:00</td><td>North Dakota State Bison at UNLV Rebels</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:00</td><td>UAB Blazers at Memphis Tigers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>20:00</td><td>Utah Mammoth at Buffalo Sabres</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Carolina Hurricanes at Chicago Blackhawks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Nashville Predators at Ottawa Senators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Dallas Stars at Pittsburgh Penguins</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Toronto Maple Leafs at Colorado Avalanche</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Columbus Blue Jackets at St. Louis Blues</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Detroit Red Wings at Montréal Canadiens</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>20:30</td><td>Syracuse Orange at Virginia Cavaliers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:30</td><td>USC Trojans at Penn State Nittany Lions</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:30</td><td>James Madison Dukes at Georgia Southern Eagles</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:30</td><td>Georgia Bulldogs at Alabama Crimson Tide</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:30</td><td>Louisiana Ragin' Cajuns at Louisiana Tech Bulldogs</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:30</td><td>Air Force Falcons at Northern Illinois Huskies</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>20:30</td><td>Tampa Bay Lightning at New York Islanders</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Philadelphia 76ers at Boston Celtics</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Minnesota Timberwolves at Miami Heat</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>21:00</td><td>Minnesota Golden Gophers at Purdue Boilermakers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>21:00</td><td>Chicago White Sox at Cleveland Guardians</td><td>MLB</td><td>AL Division Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>New York Yankees at Tampa Bay Rays</td><td>MLB</td><td>AL Division Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:30</td><td>Sacramento Kings at Golden State Warriors</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:30</td><td>Estudiantes de Río Cuarto at River Plate</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:00</td><td>Los Angeles Kings at Vegas Golden Knights</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:00</td><td>Anaheim Ducks at Calgary Flames</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>23:15</td><td>Kansas Jayhawks at Utah Utes</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>23:30</td><td>San Antonio Spurs at Phoenix Suns</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>23:30</td><td>Hawai'i Rainbow Warriors at Arizona State Sun Devils</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>23:30</td><td>Boise State Broncos at Fresno State Bulldogs</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+          <tr class="" data-competitions="Premier League (Inglaterra)"><td>08:30</td><td>Leeds United at Arsenal</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>09:00</td><td>Athletic Club at Rayo Vallecano</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>10:00</td><td>Fiorentina at Genoa</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>Bayern Munich at FC Augsburg</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>SV Elversberg at 1. FC Union Berlin</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>Bayer Leverkusen at Mainz</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>Hamburg SV at TSG Hoffenheim</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>VfB Stuttgart at SC Paderborn 07</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>11:00</td><td>Brighton &amp; Hove Albion at Sunderland</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>11:00</td><td>AFC Bournemouth at Chelsea</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>11:00</td><td>Fulham at Ipswich Town</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>11:00</td><td>Brentford at Aston Villa</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>11:15</td><td>Atlético Madrid at Alavés</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Primeira Liga (Portugal)"><td>11:30</td><td>Santa Clara at Casa Pia</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>12:15</td><td>Le Havre AC at Lille</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>North Carolina Tar Heels at Pittsburgh Panthers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Indiana Hoosiers at Nebraska Cornhuskers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Wake Forest Demon Deacons at NC State Wolfpack</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Arizona Wildcats at West Virginia Mountaineers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>UCF Knights at Oklahoma State Cowboys</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Tulane Green Wave at Army Black Knights</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Texas A&amp;M Aggies at Missouri Tigers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Sacramento State Hornets at Bowling Green Falcons</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>13:00</td><td>Parma at Internazionale</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:30</td><td>Ball State Cardinals at Northwestern Wildcats</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>13:30</td><td>Tottenham Hotspur at Manchester United</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>13:30</td><td>Getafe at Barcelona</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>13:30</td><td>Eintracht Frankfurt at RB Leipzig</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:45</td><td>South Carolina Gamecocks at Florida Gators</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>14:00</td><td>Old Dominion Monarchs at App State Mountaineers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Primeira Liga (Portugal)"><td>14:00</td><td>FC Porto at Maritimo</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>14:00</td><td>Philadelphia Flyers at Boston Bruins</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>15:00</td><td>Miami (OH) RedHawks at Massachusetts Minutemen</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>15:45</td><td>Huracán at Barracas Central</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>15:45</td><td>Frosinone at Napoli</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>15:45</td><td>Toulouse at AS Monaco</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>15:45</td><td>Angers at Brest</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>15:45</td><td>Le Mans at Paris Saint-Germain</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>15:45</td><td>Paris FC at Lorient</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>16:00</td><td>Villarreal at Real Madrid</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Ole Miss Rebels at Vanderbilt Commodores</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>UCLA Bruins at Oregon Ducks</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Texas Longhorns at Oklahoma Sooners</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Stanford Cardinal at Notre Dame Fighting Irish</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Houston Cougars at Kansas State Wildcats</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Eastern Michigan Eagles at Akron Zips</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Tulsa Golden Hurricane at Navy Midshipmen</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Virginia Tech Hokies at California Golden Bears</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Kent State Golden Flashes at Western Michigan Broncos</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Central Michigan Chippewas at Ohio Bobcats</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Duke Blue Devils at Georgia Tech Yellow Jackets</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Buffalo Bulls at Toledo Rockets</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Charlotte 49ers at North Texas Mean Green</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Illinois Fighting Illini at Michigan State Spartans</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Primeira Liga (Portugal)"><td>16:30</td><td>Estoril at Académico de Viseu</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>16:30</td><td>Vancouver Canucks at New Jersey Devils</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:45</td><td>UConn Huskies at Temple Owls</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>17:00</td><td>Rice Owls at East Carolina Pirates</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>17:00</td><td>Estudiantes de La Plata at Central Córdoba (Santiago del Estero)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>17:00</td><td>Edmonton Oilers at San Jose Sharks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>17:15</td><td>Maryland Terrapins at Ohio State Buckeyes</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>17:15</td><td>Tennessee Volunteers at Arkansas Razorbacks</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>19:00</td><td>San Diego State Aztecs at Oregon State Beavers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>19:00</td><td>Minnesota Wild at Florida Panthers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>19:15</td><td>Banfield at Tigre</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>19:30</td><td>LA Clippers at Toronto Raptors</td><td>NBA</td><td>NBA Canada Games 2026</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>Atlanta Hawks at Indiana Pacers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>Detroit Pistons at Washington Wizards</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>Nevada Wolf Pack at UTEP Miners</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>LSU Tigers at Kentucky Wildcats</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>Coastal Carolina Chanticleers at Marshall Thundering Herd</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>North Dakota State Bison at UNLV Rebels</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>UAB Blazers at Memphis Tigers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Utah Mammoth at Buffalo Sabres</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Carolina Hurricanes at Chicago Blackhawks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Nashville Predators at Ottawa Senators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Dallas Stars at Pittsburgh Penguins</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Toronto Maple Leafs at Colorado Avalanche</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Columbus Blue Jackets at St. Louis Blues</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Detroit Red Wings at Montréal Canadiens</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>Syracuse Orange at Virginia Cavaliers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>USC Trojans at Penn State Nittany Lions</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>James Madison Dukes at Georgia Southern Eagles</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>Georgia Bulldogs at Alabama Crimson Tide</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>Louisiana Ragin' Cajuns at Louisiana Tech Bulldogs</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>Air Force Falcons at Northern Illinois Huskies</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>20:30</td><td>Tampa Bay Lightning at New York Islanders</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Philadelphia 76ers at Boston Celtics</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Minnesota Timberwolves at Miami Heat</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>21:00</td><td>Minnesota Golden Gophers at Purdue Boilermakers</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="MLB"><td>21:00</td><td>Chicago White Sox at Cleveland Guardians</td><td>MLB</td><td>AL Division Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="MLB"><td>21:00</td><td>New York Yankees at Tampa Bay Rays</td><td>MLB</td><td>AL Division Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:30</td><td>Sacramento Kings at Golden State Warriors</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>21:30</td><td>Estudiantes de Río Cuarto at River Plate</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>23:00</td><td>Los Angeles Kings at Vegas Golden Knights</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>23:00</td><td>Anaheim Ducks at Calgary Flames</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>23:15</td><td>Kansas Jayhawks at Utah Utes</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NBA"><td>23:30</td><td>San Antonio Spurs at Phoenix Suns</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>23:30</td><td>Hawai'i Rainbow Warriors at Arizona State Sun Devils</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>23:30</td><td>Boise State Broncos at Fresno State Bulldogs</td><td>NCAA Football (Bowls)</td><td>Semana 6</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
         </tbody>
       </table>
     </section>
@@ -208,54 +251,54 @@
       <table>
         <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
         <tbody>
-          <tr class=""><td>04:33</td><td>Los Angeles Dodgers at Milwaukee Brewers</td><td>MLB</td><td>NL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>07:00</td><td>Dallas Mavericks at Houston Rockets</td><td>NBA</td><td>NBA China Game</td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>07:30</td><td>AS Roma at Como</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>09:00</td><td>Celta Vigo at Elche</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>10:00</td><td>Nottingham Forest at Crystal Palace</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>10:00</td><td>Everton at Hull City</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>10:00</td><td>Monza at Lazio</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:00</td><td>Bologna at Lecce</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:00</td><td>Strasbourg at Nice</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>10:30</td><td>Philadelphia Eagles at Jacksonville Jaguars</td><td>NFL</td><td>NFL London Games</td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>10:30</td><td>Borussia Mönchengladbach at FC Cologne</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>11:00</td><td>Formula 1 Msc Cruises United States Grand Prix 2026</td><td>Fórmula 1</td><td>Ronda 17</td><td>Gran Premio</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>11:00</td><td>Formula 1 Msc Cruises United States Grand Prix 2026</td><td>Fórmula 1</td><td></td><td>Gran Premio</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>11:15</td><td>Deportivo at Real Sociedad</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>11:30</td><td>C.D. Nacional at Rio Ave</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>12:15</td><td>AJ Auxerre at Stade Rennais</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>12:30</td><td>Manchester City at Liverpool</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>12:30</td><td>Schalke 04 at SC Freiburg</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>AC Milan at Sassuolo</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>13:30</td><td>Osasuna at Real Betis</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>14:00</td><td>Chicago Bears at Green Bay Packers</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>14:00</td><td>Las Vegas Raiders at New England Patriots</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>14:00</td><td>New York Giants at Washington Commanders</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>14:00</td><td>Indianapolis Colts at Pittsburgh Steelers</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>14:00</td><td>Houston Texans at Tennessee Titans</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>14:00</td><td>Cincinnati Bengals at Miami Dolphins</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>14:00</td><td>Minnesota Vikings at New Orleans Saints</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>14:00</td><td>Cleveland Browns at New York Jets</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>14:00</td><td>Vitória de Guimaraes at Benfica</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>14:45</td><td>Deportivo Riestra at San Lorenzo</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>15:45</td><td>Juventus at Cagliari</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:45</td><td>Marseille at Troyes</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>16:00</td><td>Valencia at Racing Santander</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>16:30</td><td>Estrela at Arouca</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>17:00</td><td>Independiente Rivadavia at Rosario Central</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>17:00</td><td>Argentinos Juniors at Platense</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>17:05</td><td>Denver Broncos at Los Angeles Chargers</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>17:25</td><td>Detroit Lions at Arizona Cardinals</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>17:25</td><td>San Francisco 49ers at Seattle Seahawks</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>18:00</td><td>Seattle Kraken at Washington Capitals</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>19:00</td><td>Vancouver Canucks at New York Rangers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>19:15</td><td>Belgrano (Córdoba) at Racing Club</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>19:30</td><td>Orlando Magic at Cleveland Cavaliers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Milwaukee Bucks at Charlotte Hornets</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Carolina Hurricanes at Philadelphia Flyers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:20</td><td>Baltimore Ravens at Atlanta Falcons</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:30</td><td>Independiente at Talleres (Córdoba)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>22:00</td><td>Chicago Bulls at Denver Nuggets</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+          <tr class="" data-competitions="MLB"><td>04:33</td><td>Los Angeles Dodgers at Milwaukee Brewers</td><td>MLB</td><td>NL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>07:00</td><td>Dallas Mavericks at Houston Rockets</td><td>NBA</td><td>NBA China Game</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>07:30</td><td>AS Roma at Como</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>09:00</td><td>Celta Vigo at Elche</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>10:00</td><td>Nottingham Forest at Crystal Palace</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>10:00</td><td>Everton at Hull City</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>10:00</td><td>Monza at Lazio</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>10:00</td><td>Bologna at Lecce</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>10:00</td><td>Strasbourg at Nice</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NFL"><td>10:30</td><td>Philadelphia Eagles at Jacksonville Jaguars</td><td>NFL</td><td>NFL London Games</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>Borussia Mönchengladbach at FC Cologne</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Fórmula 1"><td>11:00</td><td>Formula 1 Msc Cruises United States Grand Prix 2026</td><td>Fórmula 1</td><td>Ronda 17</td><td>Gran Premio</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Fórmula 1"><td>11:00</td><td>Formula 1 Msc Cruises United States Grand Prix 2026</td><td>Fórmula 1</td><td></td><td>Gran Premio</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>11:15</td><td>Deportivo at Real Sociedad</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Primeira Liga (Portugal)"><td>11:30</td><td>C.D. Nacional at Rio Ave</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>12:15</td><td>AJ Auxerre at Stade Rennais</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>12:30</td><td>Manchester City at Liverpool</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>12:30</td><td>Schalke 04 at SC Freiburg</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>13:00</td><td>AC Milan at Sassuolo</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>13:30</td><td>Osasuna at Real Betis</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>14:00</td><td>Chicago Bears at Green Bay Packers</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>14:00</td><td>Las Vegas Raiders at New England Patriots</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>14:00</td><td>New York Giants at Washington Commanders</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>14:00</td><td>Indianapolis Colts at Pittsburgh Steelers</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>14:00</td><td>Houston Texans at Tennessee Titans</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>14:00</td><td>Cincinnati Bengals at Miami Dolphins</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>14:00</td><td>Minnesota Vikings at New Orleans Saints</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>14:00</td><td>Cleveland Browns at New York Jets</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Primeira Liga (Portugal)"><td>14:00</td><td>Vitória de Guimaraes at Benfica</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>14:45</td><td>Deportivo Riestra at San Lorenzo</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>15:45</td><td>Juventus at Cagliari</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>15:45</td><td>Marseille at Troyes</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>16:00</td><td>Valencia at Racing Santander</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Primeira Liga (Portugal)"><td>16:30</td><td>Estrela at Arouca</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>17:00</td><td>Independiente Rivadavia at Rosario Central</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>17:00</td><td>Argentinos Juniors at Platense</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>17:05</td><td>Denver Broncos at Los Angeles Chargers</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>17:25</td><td>Detroit Lions at Arizona Cardinals</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>17:25</td><td>San Francisco 49ers at Seattle Seahawks</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>18:00</td><td>Seattle Kraken at Washington Capitals</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>19:00</td><td>Vancouver Canucks at New York Rangers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>19:15</td><td>Belgrano (Córdoba) at Racing Club</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>19:30</td><td>Orlando Magic at Cleveland Cavaliers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>Milwaukee Bucks at Charlotte Hornets</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Carolina Hurricanes at Philadelphia Flyers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>21:20</td><td>Baltimore Ravens at Atlanta Falcons</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>21:30</td><td>Independiente at Talleres (Córdoba)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>22:00</td><td>Chicago Bulls at Denver Nuggets</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
         </tbody>
       </table>
     </section>
@@ -266,24 +309,24 @@
       <table>
         <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
         <tbody>
-          <tr class=""><td>04:33</td><td>Los Angeles Dodgers at Milwaukee Brewers</td><td>MLB</td><td>NL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>04:33</td><td>CLE/CWS at Tampa Bay Rays</td><td>MLB</td><td>AL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>13:30</td><td>Venezia at Atalanta</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>14:00</td><td>Florida Panthers at Buffalo Sabres</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>15:45</td><td>Udinese at Torino</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>16:00</td><td>Newcastle United at Coventry City</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>16:00</td><td>Sevilla at Levante</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>16:00</td><td>Vélez Sarsfield at Lanús</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>16:15</td><td>Alverca at FC Famalicao</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>17:00</td><td>London Lions at Portland Trail Blazers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>18:30</td><td>Newell's Old Boys at Gimnasia (Mendoza)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Oklahoma City Thunder at Atlanta Hawks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Brooklyn Nets at Washington Wizards</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Ottawa Senators at New Jersey Devils</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:30</td><td>Minnesota Timberwolves at New York Knicks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Vegas Golden Knights at Minnesota Wild</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:15</td><td>Buffalo Bills at Los Angeles Rams</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>22:00</td><td>San Antonio Spurs at Utah Jazz</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+          <tr class="" data-competitions="MLB"><td>04:33</td><td>Los Angeles Dodgers at Milwaukee Brewers</td><td>MLB</td><td>NL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="MLB"><td>04:33</td><td>CLE/CWS at Tampa Bay Rays</td><td>MLB</td><td>AL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>13:30</td><td>Venezia at Atalanta</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>14:00</td><td>Florida Panthers at Buffalo Sabres</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>15:45</td><td>Udinese at Torino</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>16:00</td><td>Newcastle United at Coventry City</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>16:00</td><td>Sevilla at Levante</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>16:00</td><td>Vélez Sarsfield at Lanús</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Primeira Liga (Portugal)"><td>16:15</td><td>Alverca at FC Famalicao</td><td>Primeira Liga (Portugal)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NBA"><td>17:00</td><td>London Lions at Portland Trail Blazers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>18:30</td><td>Newell's Old Boys at Gimnasia (Mendoza)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>Oklahoma City Thunder at Atlanta Hawks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>Brooklyn Nets at Washington Wizards</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Ottawa Senators at New Jersey Devils</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:30</td><td>Minnesota Timberwolves at New York Knicks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>21:00</td><td>Vegas Golden Knights at Minnesota Wild</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>21:15</td><td>Buffalo Bills at Los Angeles Rams</td><td>NFL</td><td>Semana 5</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>22:00</td><td>San Antonio Spurs at Utah Jazz</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
         </tbody>
       </table>
     </section>
@@ -294,40 +337,40 @@
       <table>
         <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
         <tbody>
-          <tr class=""><td>04:33</td><td>CLE/CWS at Tampa Bay Rays</td><td>MLB</td><td>AL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>13:45</td><td>Slavia Prague at Sabah FK</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:45</td><td>Sporting CP at Lens</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Club Brugge at Internazionale</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Bayern Munich at Viking FK</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Napoli at Villarreal</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>PSV Eindhoven at RB Leipzig</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Manchester United at Atlético Madrid</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Barcelona at Galatasaray</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Lille at Arsenal</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>19:00</td><td>New Jersey Devils at Detroit Red Wings</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>19:15</td><td>Florida Panthers at Columbus Blue Jackets</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>19:30</td><td>Buffalo Sabres at Montréal Canadiens</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>19:45</td><td>Washington Capitals at Carolina Hurricanes</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>New York Knicks at Toronto Raptors</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Cleveland Cavaliers at Orlando Magic</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>20:00</td><td>Delaware Blue Hens at Middle Tennessee Blue Raiders</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>20:00</td><td>Seattle Kraken at Philadelphia Flyers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:15</td><td>Tampa Bay Lightning at New York Rangers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:30</td><td>St. Louis Blues at Ottawa Senators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:45</td><td>Vancouver Canucks at New York Islanders</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Indiana Pacers at Oklahoma City Thunder</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>21:00</td><td>Florida International Panthers at Jacksonville State Gamecocks</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>21:00</td><td>Pittsburgh Penguins at Chicago Blackhawks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:15</td><td>Minnesota Wild at Winnipeg Jets</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>21:30</td><td>Vasco da Gama at Boca Juniors</td><td>Copa Sudamericana</td><td>1st Leg</td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>21:30</td><td>Colorado Avalanche at Dallas Stars</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:45</td><td>Vegas Golden Knights at Nashville Predators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>22:00</td><td>Toronto Maple Leafs at Utah Mammoth</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>22:45</td><td>Calgary Flames at Anaheim Ducks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:00</td><td>Golden State Warriors at Los Angeles Lakers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:00</td><td>Portland Trail Blazers at Sacramento Kings</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:30</td><td>Edmonton Oilers at Los Angeles Kings</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>00:00</td><td>Boston Bruins at San Jose Sharks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+          <tr class="" data-competitions="MLB"><td>04:33</td><td>CLE/CWS at Tampa Bay Rays</td><td>MLB</td><td>AL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>13:45</td><td>Slavia Prague at Sabah FK</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>13:45</td><td>Sporting CP at Lens</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>Club Brugge at Internazionale</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>Bayern Munich at Viking FK</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>Napoli at Villarreal</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>PSV Eindhoven at RB Leipzig</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>Manchester United at Atlético Madrid</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>Barcelona at Galatasaray</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>Lille at Arsenal</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>19:00</td><td>New Jersey Devils at Detroit Red Wings</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>19:15</td><td>Florida Panthers at Columbus Blue Jackets</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>19:30</td><td>Buffalo Sabres at Montréal Canadiens</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>19:45</td><td>Washington Capitals at Carolina Hurricanes</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>New York Knicks at Toronto Raptors</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>Cleveland Cavaliers at Orlando Magic</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>Delaware Blue Hens at Middle Tennessee Blue Raiders</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Seattle Kraken at Philadelphia Flyers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:15</td><td>Tampa Bay Lightning at New York Rangers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:30</td><td>St. Louis Blues at Ottawa Senators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:45</td><td>Vancouver Canucks at New York Islanders</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Indiana Pacers at Oklahoma City Thunder</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>21:00</td><td>Florida International Panthers at Jacksonville State Gamecocks</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>21:00</td><td>Pittsburgh Penguins at Chicago Blackhawks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>21:15</td><td>Minnesota Wild at Winnipeg Jets</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Copa Sudamericana"><td>21:30</td><td>Vasco da Gama at Boca Juniors</td><td>Copa Sudamericana</td><td>1st Leg</td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>21:30</td><td>Colorado Avalanche at Dallas Stars</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>21:45</td><td>Vegas Golden Knights at Nashville Predators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>22:00</td><td>Toronto Maple Leafs at Utah Mammoth</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>22:45</td><td>Calgary Flames at Anaheim Ducks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>23:00</td><td>Golden State Warriors at Los Angeles Lakers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>23:00</td><td>Portland Trail Blazers at Sacramento Kings</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>23:30</td><td>Edmonton Oilers at Los Angeles Kings</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>00:00</td><td>Boston Bruins at San Jose Sharks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
         </tbody>
       </table>
     </section>
@@ -338,30 +381,30 @@
       <table>
         <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
         <tbody>
-          <tr class=""><td>04:33</td><td>Milwaukee Brewers at Los Angeles Dodgers</td><td>MLB</td><td>NL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>13:45</td><td>Como at Feyenoord Rotterdam</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:45</td><td>Liverpool at LASK Linz</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Borussia Dortmund at Bodo/Glimt</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Paris Saint-Germain at Manchester City</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>AEK Athens at Shakhtar Donetsk</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>FC Porto at Real Betis</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>VfB Stuttgart at Slovan Bratislava</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Real Madrid at AS Roma</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Fenerbahce at Aston Villa</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>19:00</td><td>River Plate at Sarmiento (Junín)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>19:00</td><td>Montevideo City Torque at Atlético-MG</td><td>Copa Sudamericana</td><td>1st Leg</td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>20:30</td><td>Charlotte Hornets at Boston Celtics</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:30</td><td>Brooklyn Nets at Miami Heat</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>20:30</td><td>Kennesaw State Owls at Missouri State Bears</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>20:30</td><td>Montréal Canadiens at Washington Capitals</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Phoenix Suns at San Antonio Spurs</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>New Orleans Pelicans at Dallas Mavericks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Detroit Pistons at Minnesota Timberwolves</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Chicago Bulls at Milwaukee Bucks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>21:00</td><td>Western Kentucky Hilltoppers at Sam Houston Bearkats</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>21:30</td><td>Palmeiras at Fluminense</td><td>Copa Libertadores</td><td>1st Leg</td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>21:30</td><td>Dallas Stars at Colorado Avalanche</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:30</td><td>Denver Nuggets at LA Clippers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+          <tr class="" data-competitions="MLB"><td>04:33</td><td>Milwaukee Brewers at Los Angeles Dodgers</td><td>MLB</td><td>NL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>13:45</td><td>Como at Feyenoord Rotterdam</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>13:45</td><td>Liverpool at LASK Linz</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>Borussia Dortmund at Bodo/Glimt</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>Paris Saint-Germain at Manchester City</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>AEK Athens at Shakhtar Donetsk</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>FC Porto at Real Betis</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>VfB Stuttgart at Slovan Bratislava</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>Real Madrid at AS Roma</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Champions League"><td>16:00</td><td>Fenerbahce at Aston Villa</td><td>UEFA Champions League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>19:00</td><td>River Plate at Sarmiento (Junín)</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Copa Sudamericana"><td>19:00</td><td>Montevideo City Torque at Atlético-MG</td><td>Copa Sudamericana</td><td>1st Leg</td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NBA"><td>20:30</td><td>Charlotte Hornets at Boston Celtics</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:30</td><td>Brooklyn Nets at Miami Heat</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>Kennesaw State Owls at Missouri State Bears</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>20:30</td><td>Montréal Canadiens at Washington Capitals</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Phoenix Suns at San Antonio Spurs</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>New Orleans Pelicans at Dallas Mavericks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Detroit Pistons at Minnesota Timberwolves</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Chicago Bulls at Milwaukee Bucks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>21:00</td><td>Western Kentucky Hilltoppers at Sam Houston Bearkats</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Copa Libertadores"><td>21:30</td><td>Palmeiras at Fluminense</td><td>Copa Libertadores</td><td>1st Leg</td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>21:30</td><td>Dallas Stars at Colorado Avalanche</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>23:30</td><td>Denver Nuggets at LA Clippers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
         </tbody>
       </table>
     </section>
@@ -372,45 +415,45 @@
       <table>
         <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
         <tbody>
-          <tr class=""><td>04:33</td><td>Tampa Bay Rays at CLE/CWS</td><td>MLB</td><td>AL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>04:33</td><td>Milwaukee Brewers at Los Angeles Dodgers</td><td>MLB</td><td>NL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>13:45</td><td>Bayer Leverkusen at Lech Poznan</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:45</td><td>Sunderland at Torreense</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:45</td><td>Hapoel Be'er at AZ Alkmaar</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:45</td><td>Real Sociedad at Union St.-Gilloise</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:45</td><td>AC Milan at RB Salzburg</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:45</td><td>Lillestrom at Sparta Prague</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:45</td><td>Omonia Nicosia at NK Celje</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:45</td><td>Crystal Palace at Lyon</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Olympiacos at Marseille</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Celtic at Benfica</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>SK Sturm Graz at AFC Bournemouth</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Ararat-Armenia at Jagiellonia Bialystok</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Juventus at Celta Vigo</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Besiktas at TSG Hoffenheim</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Anderlecht at Dinamo Zagreb</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Levski Sofia at NEC Nijmegen</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>Viktoria Plzen at Ferencvaros</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:00</td><td>OFI Crete at Stade Rennais</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>20:00</td><td>Gimnasia La Plata at Huracán</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>New York Rangers at New Jersey Devils</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>New York Islanders at Ottawa Senators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Buffalo Sabres at Toronto Maple Leafs</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Vancouver Canucks at Florida Panthers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Seattle Kraken at Tampa Bay Lightning</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:30</td><td>Toronto Raptors at New York Knicks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>20:30</td><td>East Carolina Pirates at UAB Blazers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:30</td><td>Georgia Southern Eagles at Old Dominion Monarchs</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>20:30</td><td>Philadelphia Flyers at Detroit Red Wings</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>21:00</td><td>Colorado State Rams at Texas State Bobcats</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>21:00</td><td>San Jose Sharks at Nashville Predators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Winnipeg Jets at Chicago Blackhawks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>St. Louis Blues at Minnesota Wild</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:15</td><td>Seattle Seahawks at Denver Broncos</td><td>NFL</td><td>Semana 6</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:30</td><td>Oklahoma City Thunder at Houston Rockets</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>21:30</td><td>Flamengo at Estudiantes de La Plata</td><td>Copa Libertadores</td><td>1st Leg</td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>22:00</td><td>Utah Mammoth at Edmonton Oilers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:00</td><td>Calgary Flames at Vegas Golden Knights</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+          <tr class="" data-competitions="MLB"><td>04:33</td><td>Tampa Bay Rays at CLE/CWS</td><td>MLB</td><td>AL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="MLB"><td>04:33</td><td>Milwaukee Brewers at Los Angeles Dodgers</td><td>MLB</td><td>NL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>13:45</td><td>Bayer Leverkusen at Lech Poznan</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>13:45</td><td>Sunderland at Torreense</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>13:45</td><td>Hapoel Be'er at AZ Alkmaar</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>13:45</td><td>Real Sociedad at Union St.-Gilloise</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>13:45</td><td>AC Milan at RB Salzburg</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>13:45</td><td>Lillestrom at Sparta Prague</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>13:45</td><td>Omonia Nicosia at NK Celje</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>13:45</td><td>Crystal Palace at Lyon</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>16:00</td><td>Olympiacos at Marseille</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>16:00</td><td>Celtic at Benfica</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>16:00</td><td>SK Sturm Graz at AFC Bournemouth</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>16:00</td><td>Ararat-Armenia at Jagiellonia Bialystok</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>16:00</td><td>Juventus at Celta Vigo</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>16:00</td><td>Besiktas at TSG Hoffenheim</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>16:00</td><td>Anderlecht at Dinamo Zagreb</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>16:00</td><td>Levski Sofia at NEC Nijmegen</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>16:00</td><td>Viktoria Plzen at Ferencvaros</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="UEFA Europa League"><td>16:00</td><td>OFI Crete at Stade Rennais</td><td>UEFA Europa League</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>20:00</td><td>Gimnasia La Plata at Huracán</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>New York Rangers at New Jersey Devils</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>New York Islanders at Ottawa Senators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Buffalo Sabres at Toronto Maple Leafs</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Vancouver Canucks at Florida Panthers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>20:00</td><td>Seattle Kraken at Tampa Bay Lightning</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:30</td><td>Toronto Raptors at New York Knicks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>East Carolina Pirates at UAB Blazers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>Georgia Southern Eagles at Old Dominion Monarchs</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>20:30</td><td>Philadelphia Flyers at Detroit Red Wings</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>21:00</td><td>Colorado State Rams at Texas State Bobcats</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>21:00</td><td>San Jose Sharks at Nashville Predators</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>21:00</td><td>Winnipeg Jets at Chicago Blackhawks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>21:00</td><td>St. Louis Blues at Minnesota Wild</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NFL"><td>21:15</td><td>Seattle Seahawks at Denver Broncos</td><td>NFL</td><td>Semana 6</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:30</td><td>Oklahoma City Thunder at Houston Rockets</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Copa Libertadores"><td>21:30</td><td>Flamengo at Estudiantes de La Plata</td><td>Copa Libertadores</td><td>1st Leg</td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>22:00</td><td>Utah Mammoth at Edmonton Oilers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>23:00</td><td>Calgary Flames at Vegas Golden Knights</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
         </tbody>
       </table>
     </section>
@@ -421,36 +464,36 @@
       <table>
         <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
         <tbody>
-          <tr class=""><td>04:33</td><td>Milwaukee Brewers at Los Angeles Dodgers</td><td>MLB</td><td>NL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>04:33</td><td>Tampa Bay Rays at CLE/CWS</td><td>MLB</td><td>AL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>15:30</td><td>FC Cologne at Eintracht Frankfurt</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:45</td><td>Sassuolo at Frosinone</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:45</td><td>Toulouse at Le Mans</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>16:00</td><td>Levante at Deportivo</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>19:00</td><td>Instituto (Córdoba) at Defensa y Justicia</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Boston Celtics at Philadelphia 76ers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Miami Heat at Orlando Magic</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Toronto Raptors at Detroit Pistons</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>20:00</td><td>Milwaukee Bucks at Indiana Pacers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>20:30</td><td>Memphis Tigers at Tulane Green Wave</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>21:00</td><td>Atlanta Hawks at Dallas Mavericks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Washington Wizards at New Orleans Pelicans</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Sacramento Kings at San Antonio Spurs</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Charlotte Hornets at Memphis Grizzlies</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>21:00</td><td>Minnesota Timberwolves at Chicago Bulls</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>21:00</td><td>App State Mountaineers at Coastal Carolina Chanticleers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>21:00</td><td>Washington Huskies at Purdue Boilermakers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>21:30</td><td>Talleres (Córdoba) at Boca Juniors</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>22:00</td><td>Pittsburgh Penguins at Colorado Avalanche</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:00</td><td>Portland Trail Blazers at Golden State Warriors</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:00</td><td>Utah Jazz at Phoenix Suns</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:00</td><td>Boston Bruins at Anaheim Ducks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>23:30</td><td>Denver Nuggets at Los Angeles Lakers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>01:00</td><td>Nebraska Cornhuskers at Oregon Ducks</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>01:00</td><td>Utah Utes at Colorado Buffaloes</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>01:00</td><td>Wisconsin Badgers at UCLA Bruins</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>01:00</td><td>Wake Forest Demon Deacons at California Golden Bears</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>01:00</td><td>Penn State Nittany Lions at Michigan Wolverines</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+          <tr class="" data-competitions="MLB"><td>04:33</td><td>Milwaukee Brewers at Los Angeles Dodgers</td><td>MLB</td><td>NL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="MLB"><td>04:33</td><td>Tampa Bay Rays at CLE/CWS</td><td>MLB</td><td>AL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>15:30</td><td>FC Cologne at Eintracht Frankfurt</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>15:45</td><td>Sassuolo at Frosinone</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>15:45</td><td>Toulouse at Le Mans</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>16:00</td><td>Levante at Deportivo</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>19:00</td><td>Instituto (Córdoba) at Defensa y Justicia</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>Boston Celtics at Philadelphia 76ers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>Miami Heat at Orlando Magic</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>Toronto Raptors at Detroit Pistons</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>20:00</td><td>Milwaukee Bucks at Indiana Pacers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:30</td><td>Memphis Tigers at Tulane Green Wave</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Atlanta Hawks at Dallas Mavericks</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Washington Wizards at New Orleans Pelicans</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Sacramento Kings at San Antonio Spurs</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Charlotte Hornets at Memphis Grizzlies</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>21:00</td><td>Minnesota Timberwolves at Chicago Bulls</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>21:00</td><td>App State Mountaineers at Coastal Carolina Chanticleers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>21:00</td><td>Washington Huskies at Purdue Boilermakers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>21:30</td><td>Talleres (Córdoba) at Boca Juniors</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>22:00</td><td>Pittsburgh Penguins at Colorado Avalanche</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>23:00</td><td>Portland Trail Blazers at Golden State Warriors</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>23:00</td><td>Utah Jazz at Phoenix Suns</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>23:00</td><td>Boston Bruins at Anaheim Ducks</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NBA"><td>23:30</td><td>Denver Nuggets at Los Angeles Lakers</td><td>NBA</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>01:00</td><td>Nebraska Cornhuskers at Oregon Ducks</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>01:00</td><td>Utah Utes at Colorado Buffaloes</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>01:00</td><td>Wisconsin Badgers at UCLA Bruins</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>01:00</td><td>Wake Forest Demon Deacons at California Golden Bears</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>01:00</td><td>Penn State Nittany Lions at Michigan Wolverines</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
         </tbody>
       </table>
     </section>
@@ -461,71 +504,133 @@
       <table>
         <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
         <tbody>
-          <tr class=""><td>04:33</td><td>Tampa Bay Rays at CLE/CWS</td><td>MLB</td><td>AL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>08:30</td><td>Chelsea at Everton</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>09:00</td><td>Atlético Madrid at Espanyol</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>10:00</td><td>Napoli at Venezia</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:30</td><td>Mainz at Schalke 04</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:30</td><td>FC Augsburg at SV Elversberg</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:30</td><td>SC Paderborn 07 at Werder Bremen</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:30</td><td>Borussia Dortmund at 1. FC Union Berlin</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>10:30</td><td>VfB Stuttgart at Hamburg SV</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>11:00</td><td>Ipswich Town at Manchester City</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>11:00</td><td>Liverpool at Brentford</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>11:00</td><td>Hull City at Fulham</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>11:15</td><td>Elche at Villarreal</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>12:15</td><td>Paris Saint-Germain at Strasbourg</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Kansas Jayhawks at Kansas State Wildcats</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Ohio State Buckeyes at Indiana Hoosiers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Virginia Cavaliers at SMU Mustangs</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Cincinnati Bearcats at West Virginia Mountaineers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Mississippi State Bulldogs at LSU Tigers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Pittsburgh Panthers at Boston College Eagles</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Florida Gators at Texas Longhorns</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Charleston Southern Buccaneers at Clemson Tigers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Northwestern Wildcats at Michigan State Spartans</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Ball State Cardinals at Bowling Green Falcons</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Georgia State Panthers at James Madison Dukes</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Florida Atlantic Owls at Army Black Knights</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:00</td><td>Internazionale at Bologna</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>13:30</td><td>Rutgers Scarlet Knights at Maryland Terrapins</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>13:30</td><td>Aston Villa at Newcastle United</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>13:30</td><td>Barcelona at Real Betis</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>13:30</td><td>RB Leipzig at Bayern Munich</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>14:00</td><td>Charlotte 49ers at Temple Owls</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>14:00</td><td>Massachusetts Minutemen at Buffalo Bulls</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>14:00</td><td>The Citadel Bulldogs at Texas A&amp;M Aggies</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>14:00</td><td>New Jersey Devils at Washington Capitals</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>14:30</td><td>Western Michigan Broncos at Central Michigan Chippewas</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>15:00</td><td>Argentinos Juniors at Banfield</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>15:45</td><td>Genoa at AS Roma</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:45</td><td>Lens at Troyes</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>15:45</td><td>Brest at Lille</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>16:00</td><td>Athletic Club at Valencia</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>16:30</td><td>Auburn Tigers at Georgia Bulldogs</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Missouri Tigers at Ole Miss Rebels</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Alabama Crimson Tide at Tennessee Volunteers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Arizona State Sun Devils at Texas Tech Red Raiders</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Toledo Rockets at Eastern Michigan Eagles</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Georgia Tech Yellow Jackets at Virginia Tech Hokies</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Akron Zips at Miami (OH) RedHawks</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>North Carolina Tar Heels at Duke Blue Devils</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>Northern Illinois Huskies at Wyoming Cowboys</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>16:30</td><td>UNLV Rebels at Air Force Falcons</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>16:30</td><td>Carolina Hurricanes at Winnipeg Jets</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>17:00</td><td>Vancouver Canucks at Tampa Bay Lightning</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>17:30</td><td>Tulsa Golden Hurricane at Rice Owls</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>17:30</td><td>Tigre at Independiente Rivadavia</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class=""><td>17:30</td><td>Lanús at Platense</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>18:00</td><td>Troy Trojans at Louisiana Ragin' Cajuns</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>19:00</td><td>Washington State Cougars at Oregon State Beavers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class=""><td>19:00</td><td>Seattle Kraken at Florida Panthers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
-<tr class="featured"><td>20:00</td><td>Florida State Seminoles at Miami Hurricanes</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:00</td><td>TCU Horned Frogs at Baylor Bears</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
-<tr class="featured"><td>20:00</td><td>Arkansas Razorbacks at Vanderbilt Commodores</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+          <tr class="" data-competitions="MLB"><td>04:33</td><td>Tampa Bay Rays at CLE/CWS</td><td>MLB</td><td>AL Championship Series</td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>08:30</td><td>Chelsea at Everton</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>09:00</td><td>Atlético Madrid at Espanyol</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>10:00</td><td>Napoli at Venezia</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>Mainz at Schalke 04</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>FC Augsburg at SV Elversberg</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>SC Paderborn 07 at Werder Bremen</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>Borussia Dortmund at 1. FC Union Berlin</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>10:30</td><td>VfB Stuttgart at Hamburg SV</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>11:00</td><td>Ipswich Town at Manchester City</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>11:00</td><td>Liverpool at Brentford</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>11:00</td><td>Hull City at Fulham</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>11:15</td><td>Elche at Villarreal</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>12:15</td><td>Paris Saint-Germain at Strasbourg</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Kansas Jayhawks at Kansas State Wildcats</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Ohio State Buckeyes at Indiana Hoosiers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Virginia Cavaliers at SMU Mustangs</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Cincinnati Bearcats at West Virginia Mountaineers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Mississippi State Bulldogs at LSU Tigers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Pittsburgh Panthers at Boston College Eagles</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Florida Gators at Texas Longhorns</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Charleston Southern Buccaneers at Clemson Tigers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Northwestern Wildcats at Michigan State Spartans</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Ball State Cardinals at Bowling Green Falcons</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Georgia State Panthers at James Madison Dukes</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:00</td><td>Florida Atlantic Owls at Army Black Knights</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>13:00</td><td>Internazionale at Bologna</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>13:30</td><td>Rutgers Scarlet Knights at Maryland Terrapins</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Premier League (Inglaterra)"><td>13:30</td><td>Aston Villa at Newcastle United</td><td>Premier League (Inglaterra)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>13:30</td><td>Barcelona at Real Betis</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Bundesliga (Alemania)"><td>13:30</td><td>RB Leipzig at Bayern Munich</td><td>Bundesliga (Alemania)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>14:00</td><td>Charlotte 49ers at Temple Owls</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>14:00</td><td>Massachusetts Minutemen at Buffalo Bulls</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>14:00</td><td>The Citadel Bulldogs at Texas A&amp;M Aggies</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>14:00</td><td>New Jersey Devils at Washington Capitals</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>14:30</td><td>Western Michigan Broncos at Central Michigan Chippewas</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>15:00</td><td>Argentinos Juniors at Banfield</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="Serie A (Italia)"><td>15:45</td><td>Genoa at AS Roma</td><td>Serie A (Italia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>15:45</td><td>Lens at Troyes</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="Ligue 1 (Francia)"><td>15:45</td><td>Brest at Lille</td><td>Ligue 1 (Francia)</td><td></td><td>Relevancia Continental</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="La Liga (España)"><td>16:00</td><td>Athletic Club at Valencia</td><td>La Liga (España)</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Auburn Tigers at Georgia Bulldogs</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Missouri Tigers at Ole Miss Rebels</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Alabama Crimson Tide at Tennessee Volunteers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Arizona State Sun Devils at Texas Tech Red Raiders</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Toledo Rockets at Eastern Michigan Eagles</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Georgia Tech Yellow Jackets at Virginia Tech Hokies</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Akron Zips at Miami (OH) RedHawks</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>North Carolina Tar Heels at Duke Blue Devils</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>Northern Illinois Huskies at Wyoming Cowboys</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>16:30</td><td>UNLV Rebels at Air Force Falcons</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>16:30</td><td>Carolina Hurricanes at Winnipeg Jets</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="NHL"><td>17:00</td><td>Vancouver Canucks at Tampa Bay Lightning</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>17:30</td><td>Tulsa Golden Hurricane at Rice Owls</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>17:30</td><td>Tigre at Independiente Rivadavia</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="" data-competitions="Liga Profesional Argentina"><td>17:30</td><td>Lanús at Platense</td><td>Liga Profesional Argentina</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>18:00</td><td>Troy Trojans at Louisiana Ragin' Cajuns</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>19:00</td><td>Washington State Cougars at Oregon State Beavers</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="" data-competitions="NHL"><td>19:00</td><td>Seattle Kraken at Florida Panthers</td><td>NHL</td><td></td><td>Normal</td><td class="badge"></td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>Florida State Seminoles at Miami Hurricanes</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>TCU Horned Frogs at Baylor Bears</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
+<tr class="featured" data-competitions="NCAA Football (Bowls)"><td>20:00</td><td>Arkansas Razorbacks at Vanderbilt Commodores</td><td>NCAA Football (Bowls)</td><td>Semana 7</td><td>Relevancia Nacional</td><td class="badge">&#9733; destacado</td></tr>
         </tbody>
       </table>
     </section>
 </div>
+<script>
+(function () {
+  var STORAGE_KEY = "agenda-deportiva-filtro";
+  var checkboxes = Array.prototype.slice.call(document.querySelectorAll(".comp-filter"));
+  var rows = Array.prototype.slice.call(document.querySelectorAll("tr[data-competitions]"));
+  var days = Array.prototype.slice.call(document.querySelectorAll("section.day"));
+  var noResults = document.getElementById("noResults");
+
+  function loadSelection() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  function saveSelection(sel) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(sel)); } catch (e) {}
+  }
+
+  function applyFilter() {
+    var selected = {};
+    checkboxes.forEach(function (c) { if (c.checked) selected[c.value] = true; });
+
+    rows.forEach(function (tr) {
+      var comps = tr.getAttribute("data-competitions").split("|");
+      var visible = comps.some(function (c) { return selected[c]; });
+      tr.style.display = visible ? "" : "none";
+    });
+
+    var anyDayVisible = false;
+    days.forEach(function (sec) {
+      var visibleRows = Array.prototype.filter.call(
+        sec.querySelectorAll("tbody tr"),
+        function (tr) { return tr.style.display !== "none"; }
+      );
+      var hasAny = visibleRows.length > 0;
+      sec.style.display = hasAny ? "" : "none";
+      if (hasAny) anyDayVisible = true;
+    });
+
+    noResults.style.display = anyDayVisible ? "none" : "block";
+    saveSelection(checkboxes.filter(function (c) { return c.checked; }).map(function (c) { return c.value; }));
+  }
+
+  var saved = loadSelection();
+  if (saved) {
+    checkboxes.forEach(function (c) { c.checked = saved.indexOf(c.value) !== -1; });
+  }
+
+  checkboxes.forEach(function (c) { c.addEventListener("change", applyFilter); });
+  document.getElementById("selAll").addEventListener("click", function () {
+    checkboxes.forEach(function (c) { c.checked = true; });
+    applyFilter();
+  });
+  document.getElementById("selNone").addEventListener("click", function () {
+    checkboxes.forEach(function (c) { c.checked = false; });
+    applyFilter();
+  });
+
+  applyFilter();
+})();
+</script>
 </body>
 </html>
