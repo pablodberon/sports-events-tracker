@@ -16,6 +16,28 @@ import requests
 
 AR_TZ = ZoneInfo("America/Argentina/Buenos_Aires")
 
+# La "jornada deportiva" arranca a las 4am: un evento que empieza a la 1, 2 o 3
+# de la madrugada se agrupa con el dia anterior (asi quedan juntos los partidos
+# nocturnos de EEUU/Europa con el resto de esa fecha).
+JORNADA_START_HOUR = 4
+
+WEEKDAYS_ES = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+MONTHS_ES = [
+    "enero", "febrero", "marzo", "abril", "mayo", "junio",
+    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+]
+
+
+def jornada_date(dt):
+    """Fecha (sin hora) de la jornada a la que pertenece dt, en horario Argentina."""
+    if dt.hour < JORNADA_START_HOUR:
+        return (dt - timedelta(days=1)).date()
+    return dt.date()
+
+
+def jornada_label(d):
+    return f"{WEEKDAYS_ES[d.weekday()]} {d.day} de {MONTHS_ES[d.month - 1]}"
+
 AIRTABLE_API_KEY = os.environ["AIRTABLE_API_KEY"]
 AIRTABLE_BASE_ID = os.environ.get("AIRTABLE_BASE_ID", "appqesyHMwFB4XOv0")
 AIRTABLE_API = f"https://api.airtable.com/v0/{AIRTABLE_BASE_ID}"
@@ -83,13 +105,21 @@ def main():
             }
         )
     rows.sort(key=lambda x: x["date"])
+    rows = rows[:400]
+
+    # Agrupar por jornada (4am a 3:59am del dia siguiente), preservando el
+    # orden cronologico ya aplicado arriba.
+    groups = {}
+    for e in rows:
+        jd = jornada_date(e["date"])
+        groups.setdefault(jd, []).append(e)
 
     def row_html(e):
         cls = "featured" if e["featured"] else ""
         badge = "&#9733; destacado" if e["featured"] else ""
         return (
             f"<tr class=\"{cls}\">"
-            f"<td>{e['date'].strftime('%Y-%m-%d %H:%M')} ART</td>"
+            f"<td>{e['date'].strftime('%H:%M')}</td>"
             f"<td>{esc(e['title'])}</td>"
             f"<td>{esc(e['competition'])}</td>"
             f"<td>{esc(e['round'])}</td>"
@@ -98,7 +128,22 @@ def main():
             "</tr>"
         )
 
-    html_rows = "\n".join(row_html(e) for e in rows[:400])
+    def day_box_html(jd, evs):
+        featured_in_day = sum(1 for e in evs if e["featured"])
+        rows_html = "\n".join(row_html(e) for e in evs)
+        return f"""
+    <section class="day">
+      <h2>{jornada_label(jd)}</h2>
+      <div class="day-meta">{len(evs)} eventos &middot; {featured_in_day} destacados</div>
+      <table>
+        <thead><tr><th>Hora (ART)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
+        <tbody>
+          {rows_html}
+        </tbody>
+      </table>
+    </section>"""
+
+    html_days = "\n".join(day_box_html(jd, evs) for jd, evs in groups.items())
     updated = now.astimezone(AR_TZ).strftime("%Y-%m-%d %H:%M ART")
     featured_count = sum(1 for e in rows if e["featured"])
 
@@ -120,18 +165,17 @@ def main():
   tr.featured {{ background:#17241a; }}
   tr.featured td.badge {{ color:#4ade80; font-weight:600; white-space:nowrap; }}
   .wrap {{ max-width:1000px; margin:0 auto; }}
+  section.day {{ background:#171920; border:1px solid #262a35; border-radius:10px;
+                 padding:16px 18px; margin-bottom:18px; }}
+  section.day h2 {{ margin:0 0 2px; font-size:16px; text-transform:capitalize; }}
+  .day-meta {{ color:#9aa0ab; font-size:12px; margin-bottom:10px; }}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Agenda deportiva</h1>
-  <div class="meta">Actualizado {updated} &middot; {len(rows)} eventos proximos &middot; {featured_count} destacados</div>
-  <table>
-    <thead><tr><th>Fecha (Argentina)</th><th>Evento</th><th>Competencia</th><th>Instancia</th><th>Importancia</th><th></th></tr></thead>
-    <tbody>
-      {html_rows}
-    </tbody>
-  </table>
+  <div class="meta">Actualizado {updated} &middot; {len(rows)} eventos proximos &middot; {featured_count} destacados &middot; la jornada va de 4am a 3:59am del dia siguiente (hora Argentina)</div>
+  {html_days}
 </div>
 </body>
 </html>"""
