@@ -9,7 +9,7 @@ Variables de entorno requeridas:
 """
 
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 import requests
@@ -57,6 +57,7 @@ def main():
     )
 
     now = datetime.now(timezone.utc)
+    cutoff = now - timedelta(hours=2)  # mantenemos eventos que arrancaron hasta hace 2hs
     rows = []
     for r in events:
         f = r["fields"]
@@ -67,7 +68,7 @@ def main():
             d = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
         except ValueError:
             continue
-        if d < now:
+        if d < cutoff:
             continue
         comp_ids = f.get("Competition") or []
         rows.append(
