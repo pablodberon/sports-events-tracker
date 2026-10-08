@@ -536,7 +536,13 @@ def run():
     existing = get_existing_events()
     print(f"Competencias activas: {len(comps)} | Equipos cargados: {len(teams)} | Eventos existentes: {len(existing)}")
 
-    to_create, to_update = [], []
+    # Claves por external_id para garantizar que cada evento aparezca una sola
+    # vez en el batch final, aunque la fuente lo haya devuelto duplicado (pasa,
+    # por ejemplo, con F1 oficial que repite la proxima carrera en un destacado
+    # ademas de listarla en el calendario completo). Si no dedupe-amos, Airtable
+    # rechaza el request entero con 422 "cannot update the same record twice".
+    creates_by_external_id = {}
+    updates_by_record_id = {}
 
     for comp in comps:
         print(f"-> {comp['name']} ({comp['source']})")
@@ -573,14 +579,17 @@ def run():
             existing_rec = existing.get(pe["external_id"])
             if existing_rec:
                 # No tocamos Importance ni Notified 15 dias: pueden haber sido editados a mano.
-                to_update.append({"id": existing_rec["id"], "fields": common_fields})
+                updates_by_record_id[existing_rec["id"]] = {"id": existing_rec["id"], "fields": common_fields}
             else:
                 fields_new = dict(common_fields)
                 fields_new["External ID"] = pe["external_id"]
                 fields_new["Importance"] = guess_importance(comp["default_importance"], pe["title"], pe["round"])
                 fields_new["Notified 15 dias"] = False
-                to_create.append({"fields": fields_new})
+                creates_by_external_id[pe["external_id"]] = {"fields": fields_new}
         time.sleep(0.3)
+
+    to_create = list(creates_by_external_id.values())
+    to_update = list(updates_by_record_id.values())
 
     if to_create:
         print(f"Creando {len(to_create)} eventos nuevos...")
