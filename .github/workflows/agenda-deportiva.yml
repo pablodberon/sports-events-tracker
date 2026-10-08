@@ -31,8 +31,8 @@ jobs:
           wc -l update_events.py
           echo "Lineas en generate_dashboard.py:"
           wc -l generate_dashboard.py
-          echo "(update_events.py deberia tener 605 lineas, generate_dashboard.py deberia tener funciones AR_TZ)"
-          grep -c "AR_TZ" generate_dashboard.py || echo "AR_TZ NO ENCONTRADO - archivo viejo"
+          echo "(update_events.py deberia tener 605 lineas, generate_dashboard.py deberia tener jornada_date)"
+          grep -c "jornada_date" generate_dashboard.py || echo "jornada_date NO ENCONTRADO - archivo viejo (falta el agrupado por jornada)"
           grep -c "updates_by_record_id" update_events.py || echo "updates_by_record_id NO ENCONTRADO - archivo viejo"
 
       - name: Actualizar eventos en Airtable
